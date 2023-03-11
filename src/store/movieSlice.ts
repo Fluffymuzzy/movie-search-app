@@ -16,6 +16,7 @@ interface SearchState {
   query: string;
   status: "idle" | "loading" | "succeeded" | "failed";
   results: Movie[];
+  selectedMovie: Movie | null;
   error: string | null;
 }
 
@@ -29,7 +30,17 @@ export const searchMovies = createAsyncThunk(
       if (response.data.Response === "False") {
         return rejectWithValue(response.data.Error);
       } else {
-        console.log(response.data);
+        const movies = response.data.Search.map((movie: any) => ({
+          imdbID: movie.imdbID,
+          title: movie.Title,
+          year: movie.Year,
+          poster: movie.Poster,
+          director: "",
+          plot: "",
+          raitings: "",
+          actors: [],
+        }));
+        return movies;
       }
     } catch (error) {
       return rejectWithValue(
@@ -48,7 +59,11 @@ const movieSlice = createSlice({
     selectedMovie: null,
     error: null,
   } as SearchState,
-  reducers: {},
+  reducers: {
+    selectMovie(state, action) {
+      state.selectedMovie = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(searchMovies.pending, (state) => {
@@ -67,4 +82,5 @@ const movieSlice = createSlice({
   },
 });
 
+export const { selectMovie } = movieSlice.actions;
 export default movieSlice.reducer;
