@@ -1,9 +1,9 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
 import Link from "next/link";
 import Image from "next/image";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaCheck } from "react-icons/fa";
 import { Movie, selectMovie } from "@/store/movieSlice";
 import { addFavorite } from "@/store/favoriteSlice";
 import { isValidImageUrl } from "@/utils/imageUrlValidation";
@@ -13,6 +13,7 @@ export interface MovieListProps {
 }
 
 const MovieList: FC<MovieListProps> = ({ searchResults }) => {
+  const [addedMovieId, setAddedMovieId] = useState<string>("");
   const { status } = useSelector((state: RootState) => state.movie);
   const favorites = useSelector((state: RootState) => state.favorite.movies);
 
@@ -24,6 +25,7 @@ const MovieList: FC<MovieListProps> = ({ searchResults }) => {
 
   const handleAddFavorite = (movie: Movie) => {
     dispatch(addFavorite(movie));
+    setAddedMovieId(movie.imdbID);
   };
 
   const isFavorite = (movie: Movie) =>
@@ -31,7 +33,7 @@ const MovieList: FC<MovieListProps> = ({ searchResults }) => {
 
   if (status === "loading") {
     return (
-      <p className="text-center my-4 text-gray-500">
+      <p className="text-center my-4 text-lg text-gray-500">
         Loading search results...
       </p>
     );
@@ -78,12 +80,18 @@ const MovieList: FC<MovieListProps> = ({ searchResults }) => {
               <p className="text-gray-400">{movie.year}</p>
             </div>
             <div className="p-4">
-              {!isFavorite(movie) && (
+              {isFavorite(movie) ? (
+                <FaCheck className="text-red-500 mr-2" />
+              ) : (
                 <button
                   className="w-4 h-4"
                   onClick={() => handleAddFavorite(movie)}
                 >
-                  <FaHeart className="text-black-500 mr-2" />
+                  {addedMovieId === movie.imdbID ? (
+                    <FaCheck className="text-red-500 mr-2" />
+                  ) : (
+                    <FaHeart className="text-black-500 mr-2" />
+                  )}
                 </button>
               )}
             </div>
