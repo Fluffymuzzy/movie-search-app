@@ -1,38 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Movie Search App
+This is a simple movie search application built with Next.js and the OMDB API. It allows users to search for movies by title and displays a list of matching movies with basic information about each one. When a user clicks on a movie from the list, they are taken to a details page that displays more information about that movie, such as plot, actors, and ratings.
 
+The application was built using TypeScript, Next.js, Tailwind CSS, and Redux for state management. It also implements pagination for search results and allows users to save their favorite movies.
 ## Getting Started
+To get started, clone the repository and install the dependencies:
+>>>git clone https://github.com/your-username/movie-search-app.git
+cd movie-search-app
+npm install 
 
-First, run the development server:
+Before running the application, you will need to obtain an OMDB API key from http://www.omdbapi.com/. Once you have your API key, create a .env.local file in the root of the project and add your API key or add your api key in next config as follows:
+>>>module.exports = {
+  nextConfig,
+  env: {
+    api_key: "YOUR_API_KEY",
+  },
+  }
+  
+  To start the development server, run:
+  >>> npm run dev OR yarn run dev
+ 
+  Open http://localhost:3000 in your browser to see the application.
+  ## Features
+  ### Search Bar
+  The search bar allows users to search for movies by title. As the user types their search query, the application makes requests to the OMDB API and displays matching movies in real-time.
+ ### Movie List
+  The movie list displays a list of matching movies with basic information such as title, year of release, and poster image. Users can click on a movie to view more information about it.
+### Movie Details
+  The movie details page displays more information about a selected movie, such as plot, actors, and ratings.
+### Pagination
+The movie list is paginated, allowing users to navigate through multiple pages of search results.
+### Favorite Movies
+Users can save their favorite movies by clicking on the heart icon next to a movie. The list of favorite movies is stored in the browser's local storage and is displayed on a separate page.
+### Adaptive Design
+The application is designed to be responsive and adapts to different screen sizes.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### Credits
+This application was created by Fluffymuzzy as a coding exercise. The OMDB API was used to fetch movie data. The following libraries and frameworks were used:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Next.js
+React
+TypeScript
+Tailwind CSS
+Redux Toolkit
+Axios
+React Icons
