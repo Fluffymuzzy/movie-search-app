@@ -1,4 +1,4 @@
-# Movie Search App
+# Movie Search App - [https://fluffymuzzy.github.io/movie-search-app]
 This is a simple movie search application built with Next.js and the OMDB API. It allows users to search for movies by title and displays a list of matching movies with basic information about each one. When a user clicks on a movie from the list, they are taken to a details page that displays more information about that movie, such as plot, actors, and ratings.
 
 The application was built using TypeScript, Next.js, Tailwind CSS, and Redux for state management. It also implements pagination for search results and allows users to save their favorite movies.
