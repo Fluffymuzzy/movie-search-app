@@ -1,5 +1,6 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
+import { removeFavorite } from "@/store/favoriteSlice";
 import Header from "@/components/Header";
 import { TiArrowBack } from "react-icons/ti";
 import Link from "next/link";
@@ -14,6 +15,12 @@ type Movie = {
 
 const FavoriteMovies = () => {
   const favorites = useSelector((state: RootState) => state.favorite.movies);
+
+  const dispatch = useDispatch();
+
+  const handleRemoveFavorite = (imdbID: any) => {
+    dispatch(removeFavorite(imdbID));
+  };
 
   return (
     <>
@@ -33,7 +40,10 @@ const FavoriteMovies = () => {
                 key={movie.imdbID}
                 className="flex items-center py-2 border-b border-gray-200 last:border-b-0"
               >
-                <Link href={`/movies/${movie.imdbID}`}>
+                <Link
+                  href={`/movies/${movie.imdbID}`}
+                  className="flex items-center w-full"
+                >
                   <div className="mr-4">
                     <Image
                       width="72"
@@ -48,6 +58,16 @@ const FavoriteMovies = () => {
                     {movie.title}
                   </h1>
                 </Link>
+                <div className="flex justify-center">
+                  <button
+                    className="px-4 py-2 text-white bg-red-500 rounded-md shadow-lg hover:bg-red-600 transition-colors duration-300 ease-in-out"
+                    onClick={() => {
+                      handleRemoveFavorite(movie.imdbID);
+                    }}
+                  >
+                    Remove
+                  </button>
+                </div>
               </li>
             ))}
           </ul>

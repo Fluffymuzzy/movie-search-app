@@ -1,8 +1,9 @@
 import React, { FC } from "react";
 import Link from "next/link";
-import logo from "../assets/logo.png";
 import Image from "next/image";
-import { FaHeart, FaSearch } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+import logo from "@/assets/logo.png";
+
 interface SearchProps {
   children: React.ReactNode;
 }
@@ -19,8 +20,8 @@ const Header: FC<SearchProps> = ({ children }) => {
       <div className="flex items-center mt-4 md:mt-0">
         {children}
         <div className="ml-4 md:ml-8">
-          <Link href="/favorites" className="flex items-center">
-            <FaHeart className="text-red-500 mr-2" />
+          <Link href="/favorite/favorites" className="flex items-center">
+            <FaHeart className="text-black-500 mr-2 w-6 h-6" />
           </Link>
         </div>
       </div>

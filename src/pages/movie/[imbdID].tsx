@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
 import Image from "next/image";
+import Link from "next/link";
+import { TiArrowBack } from "react-icons/ti";
+import { RootState } from "@/store/store";
 import Header from "@/components/Header";
 
 const MovieDetails = () => {
@@ -13,16 +15,23 @@ const MovieDetails = () => {
   return (
     <>
       <Header>
-        <h1>lol</h1>
+        <button>
+          <Link href="/">
+            <TiArrowBack className="text-black-500 mr-2 w-8 h-8" />
+          </Link>
+        </button>
       </Header>
 
       <div className="flex flex-col items-center my-4 sm:flex-row sm:items-start sm:justify-center">
-        <img
+        <Image
+          width="0"
+          height="0"
+          sizes="100vw"
           src={movie.poster}
           alt={`${movie.title} poster`}
           className="w-48 h-72 object-cover rounded-lg shadow-lg mr-4"
         />
-        <div className="flex flex-col">
+        <div className="flex flex-col pt-2">
           <h1 className="text-2xl font-bold mb-2">{movie.title}</h1>
           <p className="text-gray-500 mb-2">Year: {movie.year}</p>
           <p className="text-gray-500 mb-2">IMDb ID: {movie.imdbID}</p>

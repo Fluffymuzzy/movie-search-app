@@ -1,10 +1,11 @@
 import { FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/store/store";
 import Link from "next/link";
 import Image from "next/image";
 import { FaHeart } from "react-icons/fa";
 import { Movie, selectMovie } from "@/store/movieSlice";
-import { RootState } from "@/store/store";
+import { addFavorite } from "@/store/favoriteSlice";
 import { isValidImageUrl } from "@/utils/imageUrlValidation";
 
 export interface MovieListProps {
@@ -13,18 +14,31 @@ export interface MovieListProps {
 
 const MovieList: FC<MovieListProps> = ({ searchResults }) => {
   const { status } = useSelector((state: RootState) => state.movie);
+  const favorites = useSelector((state: RootState) => state.favorite.movies);
+
   const dispatch = useDispatch();
 
   const handleMovieClick = (movie: Movie) => {
     dispatch(selectMovie(movie));
   };
 
+  const handleAddFavorite = (movie: Movie) => {
+    dispatch(addFavorite(movie));
+  };
+
+  const isFavorite = (movie: Movie) =>
+    favorites.some((favorite) => favorite.imdbID === movie.imdbID);
+
   if (status === "loading") {
     return <p>Loading search results...</p>;
   }
 
-  if (!searchResults) {
-    return null;
+  if (!searchResults || searchResults.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-lg text-gray-500">No results found.</p>
+      </div>
+    );
   }
 
   return (
@@ -60,9 +74,14 @@ const MovieList: FC<MovieListProps> = ({ searchResults }) => {
               <p className="text-gray-400">{movie.year}</p>
             </div>
             <div className="p-4">
-              <button className="w-4 h-4">
-                <FaHeart className="text-black-500 mr-2" />
-              </button>
+              {!isFavorite(movie) && (
+                <button
+                  className="w-4 h-4"
+                  onClick={() => handleAddFavorite(movie)}
+                >
+                  <FaHeart className="text-black-500 mr-2" />
+                </button>
+              )}
             </div>
           </div>
         </div>
