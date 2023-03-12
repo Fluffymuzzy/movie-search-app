@@ -9,10 +9,6 @@ export default function Document() {
         <meta name="keywords" content="movies, search, favorites" />
         <meta name="author" content="Fluffymuzzy" />
         <link rel="icon" href="/favicon.ico" />
-        <link
-          href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap"
-          rel="stylesheet"
-        />
       </Head>
       <body>
         <Main />

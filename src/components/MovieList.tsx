@@ -30,7 +30,11 @@ const MovieList: FC<MovieListProps> = ({ searchResults }) => {
     favorites.some((favorite) => favorite.imdbID === movie.imdbID);
 
   if (status === "loading") {
-    return <p>Loading search results...</p>;
+    return (
+      <p className="text-center my-4 text-gray-500">
+        Loading search results...
+      </p>
+    );
   }
 
   if (!searchResults || searchResults.length === 0) {
