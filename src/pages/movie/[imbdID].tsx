@@ -16,7 +16,11 @@ const MovieDetails = () => {
   const dispatch = useDispatch();
 
   if (!movie) {
-    return <div>Loading movie details...</div>;
+    return (
+      <div className="text-center my-4 text-lg text-gray-500">
+        Loading movie details...
+      </div>
+    );
   }
 
   const handleAddFavorite = (movie: Movie) => {
