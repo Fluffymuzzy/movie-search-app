@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "@/store/store";
 import { Poppins } from "next/font/google";
 import Head from "next/head";
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "700", "800"],

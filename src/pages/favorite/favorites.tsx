@@ -1,10 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
 import { removeFavorite } from "@/store/favoriteSlice";
-import Header from "@/components/Header";
 import { TiArrowBack } from "react-icons/ti";
 import Link from "next/link";
 import Image from "next/image";
+import Header from "@/components/Header";
+
 
 type Movie = {
   imdbID: string;
